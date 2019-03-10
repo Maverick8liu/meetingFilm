@@ -1,4 +1,17 @@
 package com.stylefeng.guns.film.vo;
 
-public class FilmVO {
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.List;
+
+@Data
+public class FilmVO implements Serializable {
+    private int filmNum;
+    private int nowPage;
+    private int totalPage;
+    private List<FilmInfo> filmInfos;
+
+
+
 }
