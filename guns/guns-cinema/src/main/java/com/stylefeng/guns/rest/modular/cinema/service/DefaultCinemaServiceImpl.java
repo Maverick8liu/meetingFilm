@@ -222,4 +222,9 @@ public class DefaultCinemaServiceImpl implements CinemaServiceAPI{
 
         return filmInfoVO;
     }
+
+    @Override
+    public OrderQueryVO getOrderNeeds(int fieldId) {
+        return null;
+    }
 }
