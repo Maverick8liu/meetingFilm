@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserAPI{
         userInfoModel.setLifeState(""+moocUserT.getLifeState());
         userInfoModel.setBirthday(moocUserT.getBirthday());
         userInfoModel.setAddress(moocUserT.getAddress());
-        userInfoModel.setSex(moocUserT.getUserSex());
+        userInfoModel.setSex(moocUserT.getUserSex() == null?1:0);
         userInfoModel.setBeginTime(moocUserT.getBeginTime().getTime());
         userInfoModel.setBiography(moocUserT.getBiography());
 

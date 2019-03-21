@@ -2,7 +2,7 @@ package com.stylefeng.guns.core.util;
 //因为令牌对业务有一定的容忍度
 public class TokenBucket {
     private int bucketNums = 100;   //桶的容量
-    private int rate = 1;           //流入速度
+    private int rate = 1;           //流入速度 1毫秒
     private int nowTokens;          //当前令牌数量
     private long timestamp = getNowTime();
 
@@ -26,6 +26,7 @@ public class TokenBucket {
         nowTokens = nowTokens + (int)((nowTime-timestamp)*rate);
         // 添加以后的令牌数量与桶的容量那个小
         nowTokens = min(nowTokens);
+        System.out.println("lingpai count："+nowTokens);
         // 修改拿令牌的时间
         timestamp = nowTime;
         // 判断令牌是否足够
@@ -37,4 +38,16 @@ public class TokenBucket {
         }
 
     }
+
+
+    public static void main(String[] args) throws InterruptedException {
+        TokenBucket tokenBucket = new TokenBucket();
+        for(int i = 0;i<100;i++){
+            if(i == 10){
+                Thread.sleep(500);
+            }
+            System.out.println("第"+i+"次请求结果"+tokenBucket.getToken());
+        }
+    }
+
 }

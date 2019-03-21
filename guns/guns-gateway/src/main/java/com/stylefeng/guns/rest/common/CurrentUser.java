@@ -6,7 +6,8 @@ public class CurrentUser {
 
     //private static final ThreadLocal<UserInfoModel> threadLocal = new ThreadLocal<>();
 
-    private static final ThreadLocal<String> threadLocal = new ThreadLocal<>();
+    //private static final ThreadLocal<String> threadLocal = new ThreadLocal<>();
+    private static final InheritableThreadLocal<String> threadLocal = new InheritableThreadLocal<>();
   /*  public static void saveUserInfo(UserInfoModel userInfoModel){
         threadLocal.set(userInfoModel);
     }

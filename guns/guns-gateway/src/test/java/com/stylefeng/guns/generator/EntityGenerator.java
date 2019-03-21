@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +24,17 @@ import java.util.Map;
  */
 public class EntityGenerator {
 
-    @Test
+    public void twoSearch(){
+        String[] ary = new String[]{"5","15","10","23","9","45","36","39"};
+                String key = "23";
+
+        Arrays.sort(ary);
+        System.out.println();
+        //for()
+
+    }
+
+    //@Test
     public void entityGenerator() {
         AutoGenerator mpg = new AutoGenerator();
 

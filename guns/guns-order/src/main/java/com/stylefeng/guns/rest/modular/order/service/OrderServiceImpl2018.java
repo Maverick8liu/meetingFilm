@@ -2,6 +2,7 @@ package com.stylefeng.guns.rest.modular.order.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -26,7 +27,7 @@ import java.util.List;
 
 @Slf4j
 @Component
-@Service(interfaceClass = OrderServiceAPI.class,group="2018")
+@Service(interfaceClass = OrderServiceAPI.class,group="order2018")
 public class OrderServiceImpl2018 implements OrderServiceAPI{
 
     @Autowired
@@ -42,13 +43,16 @@ public class OrderServiceImpl2018 implements OrderServiceAPI{
     @Override
     public boolean isTrueSeats(String fieldId, String seats) {
         //根据FieldId找到对应的座位位置图
+        log.info("isTrueSeats fileStrByAddress path:{}",fieldId);;
         String seatPath = moocOrder2018TMapper.getSeatsByFieldId(fieldId);
-
+        log.info("isTrueSeats fileStrByAddress path:{}",seatPath);;
         // 读取位置图，判断seats是否为真
         String fileStrByAddress = ftpUtil.getFileStrByAddress(seatPath);
 
+
+
         // 将fileStrByAddress转换为JSON对象
-        JSONObject jsonObject = JSONObject.parseObject(fileStrByAddress);
+        JSONObject jsonObject = JSONObject.parseObject(seatPath);
         // seats=1,2,3   ids="1,3,4,5,6,7,88"
         String ids = jsonObject.get("ids").toString();
 
@@ -199,4 +203,45 @@ public class OrderServiceImpl2018 implements OrderServiceAPI{
             return soldSeatsByFieldId;
         }
     }
+
+    @Override
+    public OrderVO getOrderInfoById(String orderId) {
+        OrderVO orderInfoById = moocOrder2018TMapper.getOrderInfoById(orderId);
+        return orderInfoById;
+    }
+
+    @Override
+    public boolean paySuccess(String orderId) {
+
+        //测试隐式参数
+        String userId = RpcContext.getContext().getAttachment("userId");
+
+        System.out.println("****************paySuccess()*****"+userId);
+
+        MoocOrder2018T moocOrderT = new MoocOrder2018T();
+        moocOrderT.setUuid(orderId);
+        moocOrderT.setOrderStatus(1);
+
+        Integer integer = moocOrder2018TMapper.updateById(moocOrderT);
+        if(integer >= 1){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean payFail(String orderId) {
+        MoocOrder2018T moocOrderT = new MoocOrder2018T();
+        moocOrderT.setUuid(orderId);
+        moocOrderT.setOrderStatus(2);
+
+        Integer integer = moocOrder2018TMapper.updateById(moocOrderT);
+        if(integer >= 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

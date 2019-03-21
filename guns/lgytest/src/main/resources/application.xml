@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <!-- <bean id="bean" class="com.bean.Bean"></bean>
+
+    <bean id="bean1" class = "com.beanold.Bean1" name="bean1_1,bean1_2"/>
+    <alias name="bean1" alias="bean1_3"/>
+
+    <bean class="com.beanold.Bean2Factory" factory-method="getBean2" id="bean2"/>
+
+    <bean class="com.beanold.Bean3Factory" id="bean3Factory"/>
+    <bean class="com.beanold.Bean3" factory-bean="bean3Factory" factory-method="getBean3" id="bean3"/>-->
+
+
+     <bean class="com.newbean.AnotherBean" id="anotherBean"/>
+   <!-- <bean id="bean" class="com.newbean.Bean">
+      <constructor-arg index="0" name="anotherBean" type="com.newbean.AnotherBean"  ref="anotherBean"/>
+     <constructor-arg index="1" name="string" type="java.lang.String" value="qqqq"/>
+
+     <property name="anotherBean1" ref="anotherBean"/>
+     <property name="string1" value="eeee"/>
+    </bean>-->
+
+ <bean id="bean" class="com.newbean.Bean"
+       c:anotherBean-ref="anotherBean" c:string="rrrrr"
+       p:anotherBean-ref="anotherBean" p:string="ddddd"
+ />
+
+</beans>

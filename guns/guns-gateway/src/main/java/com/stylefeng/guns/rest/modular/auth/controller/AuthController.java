@@ -9,6 +9,7 @@ import com.stylefeng.guns.rest.modular.auth.util.JwtTokenUtil;
 import com.stylefeng.guns.rest.modular.auth.validator.IReqValidator;
 import com.stylefeng.guns.rest.modular.vo.ResponseVO;
 import com.stylefeng.guns.user.UserAPI;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import javax.annotation.Resource;
  * @author fengshuonan
  * @Date 2017/8/24 14:22
  */
+@Slf4j
 @RestController
 public class AuthController {
 
@@ -43,6 +45,7 @@ public class AuthController {
                 //reqValidator.validate(authRequest);
         //去掉guns自身携带的用户名密码验证机制，使用我们自己的验证
        int userId =  userAPI.login(authRequest.getUserName(),authRequest.getPassword());
+       log.info("AuthController createAuthenticationToken userid is {}",userId);
         if(userId == 0){
             validate = false;
         }

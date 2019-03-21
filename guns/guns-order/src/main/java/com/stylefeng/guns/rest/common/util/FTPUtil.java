@@ -77,7 +77,7 @@ public class FTPUtil {
         ftpUtil.setPort(21);
         ftpUtil.setUserName("ftp");
         ftpUtil.setPassword("ftp123456");
-        String fileStrByAddress = ftpUtil.getFileStrByAddress("seats/cgs.json");
+        String fileStrByAddress = ftpUtil.getFileStrByAddress("seats/123214.json");
         System.out.println(fileStrByAddress);
     }
 

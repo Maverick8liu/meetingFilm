@@ -199,4 +199,39 @@ public class OrderServiceImpl2017 implements OrderServiceAPI{
             return soldSeatsByFieldId;
         }
     }
+
+
+    @Override
+    public OrderVO getOrderInfoById(String orderId) {
+        OrderVO orderInfoById = moocOrder2017TMapper.getOrderInfoById(orderId);
+        return orderInfoById;
+    }
+
+    @Override
+    public boolean paySuccess(String orderId) {
+        MoocOrder2017T moocOrderT = new MoocOrder2017T();
+        moocOrderT.setUuid(orderId);
+        moocOrderT.setOrderStatus(1);
+
+        Integer integer = moocOrder2017TMapper.updateById(moocOrderT);
+        if(integer >= 1){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean payFail(String orderId) {
+        MoocOrder2017T moocOrderT = new MoocOrder2017T();
+        moocOrderT.setUuid(orderId);
+        moocOrderT.setOrderStatus(2);
+
+        Integer integer = moocOrder2017TMapper.updateById(moocOrderT);
+        if(integer >= 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
